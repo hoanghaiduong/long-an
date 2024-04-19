@@ -206,7 +206,8 @@
         <script type="text/javascript">
             function re_captcha() {
                 $url = "{{ URL('/customer/auth/code/captcha') }}";
-                $url = $url + "/" + Math.random()+'?captcha_session_id=default_recaptcha_id_customer_regi';
+                var randomNumber = Math.floor(Math.random() * 1000); // Tạo một số ngẫu nhiên từ 0 đến 999
+                $url = $url + "/" + randomNumber+'?captcha_session_id=default_recaptcha_id_customer_regi';
                 document.getElementById('default_recaptcha_id').src = $url;
                 console.log('url: '+ $url);
             }

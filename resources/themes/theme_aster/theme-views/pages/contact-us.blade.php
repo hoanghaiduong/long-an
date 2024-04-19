@@ -141,7 +141,8 @@
         <script type="text/javascript">
             function re_captcha() {
                 $url = "{{ URL('/contact/code/captcha') }}";
-                $url = $url + "/" + Math.random();
+                var randomNumber = Math.floor(Math.random() * 1000); // Tạo một số ngẫu nhiên từ 0 đến 999
+                $url = $url + "/" + randomNumber;
                 document.getElementById('default_recaptcha_id').src = $url;
                 console.log('url: '+ $url);
             }
