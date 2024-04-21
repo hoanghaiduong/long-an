@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title', translate('All_Seller_Page'))
+@section('title', translate('All_Posts_Page'))
 
 @push('css_or_js')
     
@@ -120,7 +120,7 @@
                                 <div class="{{Session::get('direction') === "rtl" ? '' : ''}}">
                                     <div class="owl-theme owl-carousel posts-slider">
                                         @foreach($posts as $index=>$post)
-                                        <a href="" class="d-block">
+                                        <a href="{{route('post_view',['id'=>$post['id']])}}" class="d-block">
                                             <div class="position-absolute w-100  p-lg-4 p-sm-2" style="bottom: 0px;left: 0px; z-index: 10;background: rgba(255, 255, 255, 0.1);">
                                                 <h5 class="text-white two-row-truncate">{{$post->title}}</h5>
                                                 <p class="text-white two-row-truncate">{{$post->sub_title}}</p>
@@ -142,9 +142,9 @@
             <div class="col-12 col-xl-4">  
                 <div class="bg-primary-light rounded-10 mb-3 p-3" data-bg-img="{{ asset('public/assets/front-end/img/media/bg.png') }}">
                    <span class="font-weight-bold text-uppercase" style="color: {{$web_config['primary_color']}}!important">SỰ KIỆN </span>
-                   <span class="badge badge-light radius-50 fz-full ml-1">{{ $latestEventPost ? $latestEventPost->count() : 0 }}</span>
+                   <span class="badge badge-light radius-50 fz-full ml-1">{{ $eventPostsCount ? $eventPostsCount : 0 }}</span>
                     <div class="float-right">
-                        <a class="text-capitalize view-all-text" href="{{route('products',['data_from'=>'featured','page'=>1])}}" style="color: {{$web_config['primary_color']}}!important">
+                        <a class="text-capitalize view-all-text" href="{{route('posts',['postType'=>'Sự kiện'])}}" style="color: {{$web_config['primary_color']}}!important">
                             {{ translate('view_all')}}
                             <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left mr-1 ml-n1 mt-1' : 'right ml-1'}}"></i>
                         </a>

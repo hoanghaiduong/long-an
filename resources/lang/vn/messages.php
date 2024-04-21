@@ -1,4 +1,4 @@
-<?php return array (
+<?php return array(
   'Dashboard' => 'Bảng điều khiển',
   'order_management' => 'Quản lý đơn hàng',
   'Posts_management' => 'Quản lý bài viết',
@@ -6699,7 +6699,7 @@
   'post_type_title' => 'Post type title',
   'employee' => 'Employee',
   'posts_management' => 'Quản lý bài đăng',
-  'Posts_Management' => 'Posts Management',
+  'Posts_Management' => 'Quản lý bài viết',
   'posts management' => 'Posts management',
   'edit_Role' => 'Edit Role',
   'role_Update' => 'Role Update',
@@ -6772,4 +6772,5 @@
   'role_updated_successfully' => 'Đã cập nhật vai trò thành công',
   'employee_updated_successfully' => 'Nhân viên được cập nhật thành công',
   'no_posts_found' => 'No posts found',
+  'All_Posts_Page' => 'All Posts Page',
 );

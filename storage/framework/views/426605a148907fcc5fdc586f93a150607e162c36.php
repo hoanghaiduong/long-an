@@ -64,6 +64,12 @@
                                        for="pos_management"><?php echo e(translate('pos_management')); ?></label>
                             </div>
                         </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input module-permission" name="modules[]" value="posts_management" id="posts" <?php echo e(in_array('posts_management',(array)json_decode($role['module_access']))?'checked':''); ?>>
+                                <label class="title-color mb-0" style="<?php echo e(Session::get('direction') === "rtl" ? 'margin-right: 1.25rem;' : ''); ?>;" for="posts"><?php echo e(translate('Posts_Management')); ?></label>
+                            </div>
+                        </div>
                         <div class="col-lg-3 col-sm-6">
                             <div class="form-group form-check">
                                 <input type="checkbox" name="modules[]" value="order_management"

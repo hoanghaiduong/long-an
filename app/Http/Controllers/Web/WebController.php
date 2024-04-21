@@ -131,7 +131,13 @@ class WebController extends Controller
                 $query->where('tags.id', $tagId);
             });
         }
+        if ($request->has('postType')) {
 
+            $post_type = $request->input('postType');
+            $query->whereHas('postType', function ($query) use ($post_type) {
+                $query->where('name', $post_type);
+            });
+        }
         // Áp dụng điều kiện tìm kiếm theo tác giả
         if ($request->has('author_id')) {
             $authorId = $request->input('author_id');
@@ -145,6 +151,10 @@ class WebController extends Controller
         $latestEventPost = Post::whereHas('postType', function ($query) {
             $query->where('name', 'Sự kiện');
         })->latest()->first();
+        // Đếm số lượng bài đăng có loại "Sự kiện"
+        $eventPostsCount = Post::whereHas('postType', function ($query) {
+            $query->where('name', 'Sự kiện');
+        })->count();
 
         if ($request->ajax()) {
             return response()->json([
@@ -152,7 +162,7 @@ class WebController extends Controller
             ], 200);
         }
 
-        return view('web-views.posts', compact('posts', 'latestEventPost', 'adminsWithPostsManagementAccess'));
+        return view('web-views.posts', compact('posts', 'latestEventPost', 'adminsWithPostsManagementAccess', 'eventPostsCount'));
     }
 
 
