@@ -1,1 +1,0 @@
-<?php /**PATH C:\xampp\htdocs\long-an\resources\views/layouts/back-end/partials/_front-settings.blade.php ENDPATH**/ ?>

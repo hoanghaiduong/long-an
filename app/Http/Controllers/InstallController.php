@@ -134,7 +134,7 @@ class InstallController extends Controller
         $refund_policy = BusinessSetting::where(['type' => 'refund-policy'])->first();
         if ($refund_policy) {
             $refund_value = json_decode($refund_policy['value'], true);
-            if(!isset($refund_value['status'])){
+            if (!isset($refund_value['status'])) {
                 BusinessSetting::where(['type' => 'refund-policy'])->update([
                     'value' => json_encode([
                         'status' => 1,
@@ -142,7 +142,7 @@ class InstallController extends Controller
                     ]),
                 ]);
             }
-        }elseif(!$refund_policy){
+        } elseif (!$refund_policy) {
             BusinessSetting::insert([
                 'type' => 'refund-policy',
                 'value' => json_encode([
@@ -155,7 +155,7 @@ class InstallController extends Controller
         $return_policy = BusinessSetting::where(['type' => 'return-policy'])->first();
         if ($return_policy) {
             $return_value = json_decode($return_policy['value'], true);
-            if(!isset($return_value['status'])){
+            if (!isset($return_value['status'])) {
                 BusinessSetting::where(['type' => 'return-policy'])->update([
                     'value' => json_encode([
                         'status' => 1,
@@ -163,7 +163,7 @@ class InstallController extends Controller
                     ]),
                 ]);
             }
-        }elseif(!$return_policy){
+        } elseif (!$return_policy) {
             BusinessSetting::insert([
                 'type' => 'return-policy',
                 'value' => json_encode([
@@ -176,7 +176,7 @@ class InstallController extends Controller
         $cancellation_policy = BusinessSetting::where(['type' => 'cancellation-policy'])->first();
         if ($cancellation_policy) {
             $cancellation_value = json_decode($cancellation_policy['value'], true);
-            if(!isset($cancellation_value['status'])){
+            if (!isset($cancellation_value['status'])) {
                 BusinessSetting::where(['type' => 'cancellation-policy'])->update([
                     'value' => json_encode([
                         'status' => 1,
@@ -184,7 +184,7 @@ class InstallController extends Controller
                     ]),
                 ]);
             }
-        }elseif(!$cancellation_policy){
+        } elseif (!$cancellation_policy) {
             BusinessSetting::insert([
                 'type' => 'cancellation-policy',
                 'value' => json_encode([
@@ -220,7 +220,7 @@ class InstallController extends Controller
         ]);
 
         DB::table('colors')
-            ->whereIn('id', [16,38,93])
+            ->whereIn('id', [16, 38, 93])
             ->delete();
 
         //apple login information insert
@@ -269,178 +269,176 @@ class InstallController extends Controller
             }
 
             $this->set_data();
-
-
         } catch (\Exception $exception) {
             //
         }
 
         // guest checkout add
-//        DB::table('business_settings')->updateOrInsert([
-//            'type' => 'guest_checkout',
-//            'value' => 0,
-//            'updated_at' => now()
-//        ]);
-//
-//        // minimum_order_amount
-//        DB::table('business_settings')->updateOrInsert([
-//            'type' => 'minimum_order_amount',
-//            'value' => 0,
-//            'updated_at' => now()
-//        ]);
-//
-//        DB::table('business_settings')->updateOrInsert([
-//            'type' => 'minimum_order_amount_by_seller',
-//            'value' => 0,
-//            'updated_at' => now()
-//        ]);
-//
-//        DB::table('business_settings')->updateOrInsert([
-//            'type' => 'minimum_order_amount_status',
-//            'value' => 0,
-//            'updated_at' => now()
-//        ]);
-//
-//        //admin_login_url
-//        DB::table('business_settings')->updateOrInsert([
-//            'type' => 'admin_login_url',
-//            'value' => 'admin',
-//            'updated_at' => now()
-//        ]);
-//
-//        //employee_login_url
-//        DB::table('business_settings')->updateOrInsert([
-//            'type' => 'employee_login_url',
-//            'value' => 'employee',
-//            'updated_at' => now()
-//        ]);
-//
-//        //free_delivery_status
-//        DB::table('business_settings')->updateOrInsert([
-//            'type' => 'free_delivery_status',
-//            'value' => 0,
-//            'updated_at' => now()
-//        ]);
-//
-//        //free_delivery_responsibility
-//        DB::table('business_settings')->updateOrInsert([
-//            'type' => 'free_delivery_responsibility',
-//            'value' => 'admin',
-//            'updated_at' => now()
-//        ]);
-//
-//        //free_delivery_over_amount
-//        DB::table('business_settings')->updateOrInsert([
-//            'type' => 'free_delivery_over_amount',
-//            'value' => 0,
-//            'updated_at' => now()
-//        ]);
-//
-//        //free_delivery_over_amount
-//        DB::table('business_settings')->updateOrInsert([
-//            'type' => 'free_delivery_over_amount_seller',
-//            'value' => 0,
-//            'updated_at' => now()
-//        ]);
-//
-//        //add_funds_to_wallet
-//        DB::table('business_settings')->updateOrInsert([
-//            'type' => 'add_funds_to_wallet',
-//            'value' => 0,
-//            'updated_at' => now()
-//        ]);
-//
-//        //minimum_add_fund_amount
-//        DB::table('business_settings')->updateOrInsert([
-//            'type' => 'minimum_add_fund_amount',
-//            'value' => 0,
-//            'updated_at' => now()
-//        ]);
-//
-//        //maximum_add_fund_amount
-//        DB::table('business_settings')->updateOrInsert([
-//            'type' => 'maximum_add_fund_amount',
-//            'value' => 0,
-//            'updated_at' => now()
-//        ]);
-//
-//        //user_app_version_control
-//        DB::table('business_settings')->updateOrInsert([
-//            'type' => 'user_app_version_control',
-//            'value' => 0,
-//            'updated_at' => now()
-//        ]);
-//
-//        //user_app_version_control
-//        DB::table('business_settings')->insert([
-//            'type' => 'user_app_version_control',
-//            'value' => json_encode([
-//                "for_android" => [
-//                    "status" => 1,
-//                    "version" => "14.1",
-//                    "link" => ""
-//                ],
-//                "for_ios" => [
-//                    "status" => 1,
-//                    "version" => "14.1",
-//                    "link" => ""
-//                ]
-//            ]),
-//            'updated_at' => now()
-//        ]);
-//
-//        //seller_app_version_control
-//        DB::table('business_settings')->insert([
-//            'type' => 'seller_app_version_control',
-//            'value' => json_encode([
-//                "for_android" => [
-//                    "status" => 1,
-//                    "version" => "14.1",
-//                    "link" => ""
-//                ],
-//                "for_ios" => [
-//                    "status" => 1,
-//                    "version" => "14.1",
-//                    "link" => ""
-//                ]
-//            ]),
-//            'updated_at' => now()
-//        ]);
-//
-//        //Delivery_man_app_version_control
-//        DB::table('business_settings')->insert([
-//            'type' => 'delivery_man_app_version_control',
-//            'value' => json_encode([
-//                "for_android" => [
-//                    "status" => 1,
-//                    "version" => "14.1",
-//                    "link" => ""
-//                ],
-//                "for_ios" => [
-//                    "status" => 1,
-//                    "version" => "14.1",
-//                    "link" => ""
-//                ]
-//            ]),
-//            'updated_at' => now()
-//        ]);
-//
-//        //whatsapp
-//        DB::table('business_settings')->insert([
-//            'type' => 'whatsapp',
-//            'value' => json_encode([
-//                "status"=>1,
-//                "phone"=>"00000000000"
-//                ]),
-//            'updated_at' => now()
-//        ]);
-//
-//        //currency_symbol_position
-//        DB::table('business_settings')->insert([
-//            'type' => 'currency_symbol_position',
-//            'value' => "left",
-//            'updated_at' => now()
-//        ]);
+        //        DB::table('business_settings')->updateOrInsert([
+        //            'type' => 'guest_checkout',
+        //            'value' => 0,
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        // minimum_order_amount
+        //        DB::table('business_settings')->updateOrInsert([
+        //            'type' => 'minimum_order_amount',
+        //            'value' => 0,
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        DB::table('business_settings')->updateOrInsert([
+        //            'type' => 'minimum_order_amount_by_seller',
+        //            'value' => 0,
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        DB::table('business_settings')->updateOrInsert([
+        //            'type' => 'minimum_order_amount_status',
+        //            'value' => 0,
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        //admin_login_url
+        //        DB::table('business_settings')->updateOrInsert([
+        //            'type' => 'admin_login_url',
+        //            'value' => 'admin',
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        //employee_login_url
+        //        DB::table('business_settings')->updateOrInsert([
+        //            'type' => 'employee_login_url',
+        //            'value' => 'employee',
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        //free_delivery_status
+        //        DB::table('business_settings')->updateOrInsert([
+        //            'type' => 'free_delivery_status',
+        //            'value' => 0,
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        //free_delivery_responsibility
+        //        DB::table('business_settings')->updateOrInsert([
+        //            'type' => 'free_delivery_responsibility',
+        //            'value' => 'admin',
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        //free_delivery_over_amount
+        //        DB::table('business_settings')->updateOrInsert([
+        //            'type' => 'free_delivery_over_amount',
+        //            'value' => 0,
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        //free_delivery_over_amount
+        //        DB::table('business_settings')->updateOrInsert([
+        //            'type' => 'free_delivery_over_amount_seller',
+        //            'value' => 0,
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        //add_funds_to_wallet
+        //        DB::table('business_settings')->updateOrInsert([
+        //            'type' => 'add_funds_to_wallet',
+        //            'value' => 0,
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        //minimum_add_fund_amount
+        //        DB::table('business_settings')->updateOrInsert([
+        //            'type' => 'minimum_add_fund_amount',
+        //            'value' => 0,
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        //maximum_add_fund_amount
+        //        DB::table('business_settings')->updateOrInsert([
+        //            'type' => 'maximum_add_fund_amount',
+        //            'value' => 0,
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        //user_app_version_control
+        //        DB::table('business_settings')->updateOrInsert([
+        //            'type' => 'user_app_version_control',
+        //            'value' => 0,
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        //user_app_version_control
+        //        DB::table('business_settings')->insert([
+        //            'type' => 'user_app_version_control',
+        //            'value' => json_encode([
+        //                "for_android" => [
+        //                    "status" => 1,
+        //                    "version" => "14.1",
+        //                    "link" => ""
+        //                ],
+        //                "for_ios" => [
+        //                    "status" => 1,
+        //                    "version" => "14.1",
+        //                    "link" => ""
+        //                ]
+        //            ]),
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        //seller_app_version_control
+        //        DB::table('business_settings')->insert([
+        //            'type' => 'seller_app_version_control',
+        //            'value' => json_encode([
+        //                "for_android" => [
+        //                    "status" => 1,
+        //                    "version" => "14.1",
+        //                    "link" => ""
+        //                ],
+        //                "for_ios" => [
+        //                    "status" => 1,
+        //                    "version" => "14.1",
+        //                    "link" => ""
+        //                ]
+        //            ]),
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        //Delivery_man_app_version_control
+        //        DB::table('business_settings')->insert([
+        //            'type' => 'delivery_man_app_version_control',
+        //            'value' => json_encode([
+        //                "for_android" => [
+        //                    "status" => 1,
+        //                    "version" => "14.1",
+        //                    "link" => ""
+        //                ],
+        //                "for_ios" => [
+        //                    "status" => 1,
+        //                    "version" => "14.1",
+        //                    "link" => ""
+        //                ]
+        //            ]),
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        //whatsapp
+        //        DB::table('business_settings')->insert([
+        //            'type' => 'whatsapp',
+        //            'value' => json_encode([
+        //                "status"=>1,
+        //                "phone"=>"00000000000"
+        //                ]),
+        //            'updated_at' => now()
+        //        ]);
+        //
+        //        //currency_symbol_position
+        //        DB::table('business_settings')->insert([
+        //            'type' => 'currency_symbol_position',
+        //            'value' => "left",
+        //            'updated_at' => now()
+        //        ]);
 
         // data insert into shipping table
         $new_shipping_type = new ShippingType;
@@ -460,9 +458,10 @@ class InstallController extends Controller
         return view('installation.step6');
     }
 
-    public static function notification_message_import(){
+    public static function notification_message_import()
+    {
         /** for customer */
-        $user_type_customer = NotificationMessage::where('user_type','customer')->get();
+        $user_type_customer = NotificationMessage::where('user_type', 'customer')->get();
         $array_for_customer_message_key = [
             'order_pending_message',
             'order_confirmation_message',
@@ -478,20 +477,21 @@ class InstallController extends Controller
             'message_from_seller',
             'fund_added_by_admin_message',
         ];
-        foreach ($array_for_customer_message_key as $key=>$value ){
-            $key_check = $user_type_customer->where('key',$value)->first();
-            if($key_check == null){
+        foreach ($array_for_customer_message_key as $key => $value) {
+            $key_check = $user_type_customer->where('key', $value)->first();
+            if ($key_check == null) {
                 DB::table('notification_messages')->updateOrInsert([
-                    'user_type'=>'customer',
-                    'key'=>$value,
-                    'message'=>'customize your'.' '.str_replace('_',' ', $value).' '.'message',
-                    'created_at'=>now(),
-                    'updated_at'=>now(),
+                    'user_type' => 'customer',
+                    'key' => $value,
+                    'message' => 'customize your' . ' ' . str_replace('_', ' ', $value) . ' ' . 'message',
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ]);
             }
-        }/**end for customer*/
+        }
+        /**end for customer*/
 
-        $user_type_seller = NotificationMessage::where('user_type','seller')->get();
+        $user_type_seller = NotificationMessage::where('user_type', 'seller')->get();
         $array_for_seller_message_key = [
             'new_order_message',
             'refund_request_message',
@@ -506,21 +506,22 @@ class InstallController extends Controller
             'refund_request_status_changed_by_admin',
 
         ];
-        foreach ($array_for_seller_message_key as $key=>$value ){
-            $key_check = $user_type_seller->where('key',$value)->first();
-            if($key_check == null){
+        foreach ($array_for_seller_message_key as $key => $value) {
+            $key_check = $user_type_seller->where('key', $value)->first();
+            if ($key_check == null) {
                 DB::table('notification_messages')->insert([
-                    'user_type'=>'seller',
-                    'key'=>$value,
-                    'message'=>'customize your'.' '.str_replace('_',' ', $value).' '.'message',
-                    'created_at'=>now(),
-                    'updated_at'=>now(),
+                    'user_type' => 'seller',
+                    'key' => $value,
+                    'message' => 'customize your' . ' ' . str_replace('_', ' ', $value) . ' ' . 'message',
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ]);
             }
-        }/**end for seller*/
+        }
+        /**end for seller*/
 
         /**start delivery man*/
-        $user_type_delivery_man = NotificationMessage::where('user_type','delivery_man')->get();
+        $user_type_delivery_man = NotificationMessage::where('user_type', 'delivery_man')->get();
         $array_for_delivery_man_message_key = [
             'new_order_assigned_message',
             'expected_delivery_date',
@@ -536,21 +537,23 @@ class InstallController extends Controller
             'withdraw_request_status_message',
 
         ];
-        foreach ($array_for_delivery_man_message_key as $key=>$value ){
-            $key_check = $user_type_delivery_man->where('key',$value)->first();
-            if($key_check == null){
+        foreach ($array_for_delivery_man_message_key as $key => $value) {
+            $key_check = $user_type_delivery_man->where('key', $value)->first();
+            if ($key_check == null) {
                 DB::table('notification_messages')->insert([
-                    'user_type'=>'delivery_man',
-                    'key'=>$value,
-                    'message'=>'customize your'.' '.str_replace('_',' ', $value).' '.'message',
-                    'created_at'=>now(),
-                    'updated_at'=>now(),
+                    'user_type' => 'delivery_man',
+                    'key' => $value,
+                    'message' => 'customize your' . ' ' . str_replace('_', ' ', $value) . ' ' . 'message',
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ]);
             }
-        }/**end for delivery man*/
+        }
+        /**end for delivery man*/
     }
 
-    public static function company_riliability_import(){
+    public static function company_riliability_import()
+    {
         $datas = [
             [
                 'item' => 'delivery_info',
@@ -588,7 +591,7 @@ class InstallController extends Controller
         if (self::check_database_connection($request->DB_HOST, $request->DB_DATABASE, $request->DB_USERNAME, $request->DB_PASSWORD)) {
 
             $key = base64_encode(random_bytes(32));
-            $output = 'APP_NAME=6valley' . time() . '
+            $output = 'APP_NAME=' . $request->APP_NAME . time() . '
                     APP_ENV=live
                     APP_KEY=base64:' . $key . '
                     APP_DEBUG=false
