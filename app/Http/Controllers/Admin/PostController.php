@@ -77,26 +77,31 @@ class PostController extends Controller
         $imagesTags = $request->fileImages;
         $baseUrl = URL::to('/');
         // Loop through each img tag and process
-        foreach ($imagesTags as $index => $imageTag) {
-            // Upload the image to the server
-            $uploadedImage = ImageManager::upload('posts/images/', 'webp', $imageTag);
+        if ($imagesTags !== null) {
+            foreach ($imagesTags as $index => $imageTag) {
 
-            // Find all img tags in the DOM
-            $imgElements = $dom->getElementsByTagName('img');
+                if ($imageTag->getMimeType() && strpos($imageTag->getMimeType(), 'image/') === 0) {
+                    // Find all img tags in the DOM
+                    $imgElements = $dom->getElementsByTagName('img');
 
-            // Loop through img elements
-            foreach ($imgElements as $imgElement) {
-                // Get the src attribute value
-                $src = $imgElement->getAttribute('src');
+                    // Loop through img elements
+                    foreach ($imgElements as $imgElement) {
+                        // Get the src attribute value
+                        $src = $imgElement->getAttribute('src');
 
-                // If the src attribute matches the Blob URL, replace it with the uploaded image URL
-                if (strpos($src, 'blob:') === 0) {
-                    $imgElement->setAttribute('src',  $baseUrl . '/storage/app/public/posts/images/'  . $uploadedImage);
-                    // Break the loop if replacement is done for the current image
-                    break;
+                        // If the src attribute matches the Blob URL, replace it with the uploaded image URL
+                        if (strpos($src, 'blob:') === 0) {
+                            // Upload the image to the server
+                            $uploadedImage = ImageManager::upload('posts/images/', 'webp', $imageTag);
+                            $imgElement->setAttribute('src',  $baseUrl . '/storage/app/public/posts/images/'  . $uploadedImage);
+                            // Break the loop if replacement is done for the current image
+                            break;
+                        }
+                    }
                 }
             }
         }
+
 
         // Get the updated HTML content
         $htmlContent = $dom->saveHTML();

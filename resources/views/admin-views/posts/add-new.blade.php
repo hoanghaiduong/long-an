@@ -501,9 +501,13 @@
                 var tempDiv = document.createElement('div');
                 tempDiv.innerHTML = modifiedHTML;
                 var imgSrcs = [];
-                tempDiv.querySelectorAll('img').forEach(function(img) {
-                    imgSrcs.push(img.src);
-                });
+                  tempDiv.querySelectorAll('img').forEach(function(img) {
+                    // Check if src is a blob
+                    if (img.src.startsWith('blob:')) {
+                        imgSrcs.push(img.src);
+                    }
+                    });
+
 
                 // Fetch all images asynchronously
                 Promise.all(imgSrcs.map(src => fetch(src).then(response => response.blob())))
